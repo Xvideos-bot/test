@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>freeteens</title>
+  <meta name="generator" content="WYSIWYG Web Builder 18 - https://www.wysiwygwebbuilder.com">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #000;
+      color: #fff;
+    }
+
+    #container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    #takeTest {
+      color: yellow;
+      font-size: 24px;
+      margin: 20px 0;
+    }
+
+    #instructions {
+      color: red;
+      font-size: 20px;
+      margin: 10px 0;
+      display: none;
+    }
+
+    #vpnWarning {
+      color: #f00;
+      font-size: 18px;
+      margin: 10px 0;
+    }
+
+    #getOffer {
+      color: white;
+      font-size: 18px;
+      margin: 10px 0;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      cursor: pointer;
+    }
+
+    #startButton {
+      background-color: yellow;
+      color: black;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    #startButton:hover {
+      background-color: orange;
+    }
+
+    /* Увеличенный текст для мобильной версии */
+    @media (max-width: 600px) {
+      #takeTest {
+        font-size: 24px;
+      }
+
+      #instructions {
+        font-size: 16px;
+      }
+
+      #getOffer {
+        font-size: 20px;
+      }
+
+      #startButton {
+        font-size: 16px;
+      }
+    }
+  </style>
+  <script>
+    const translations = {
+      en: {
+        takeTest: "TAKE A SHORT TEST",
+        instructions: "THE VIDEO WILL RUN AFTER THE TEST.",
+        vpnWarning: "WILL NOT START WITH VPN",
+        initialOffer: "The video will start automatically on the “Thank You!” page.",
+        getOffer: "DON'T RUSH, TAKE A LOOK!",
+        initialButton: "START TEST",
+        updatedButton: "BONUS",
+        desktopBonusLink: "https://www.meendo.com/video/8308126_1597760?partner=26396",
+        mobileBonusLink: "https://m.meendo.com/video/8308126_1597760?partner=26396"
+      },
+      ru: {
+        takeTest: "ПРОЙДИТЕ КОРОТКИЙ ТЕСТ",
+        instructions: "ВИДЕО ЗАПУСТИТСЯ ПОСЛЕ ТЕСТА.",
+        vpnWarning: "НЕ ЗАПУСТИТСЯ С VPN",
+        initialOffer: "Видео начнётся автоматически на странице «Спасибо!».",
+        getOffer: "НЕ СПИШИ, ПОСМОТРИ!",
+        initialButton: "НАЧАТЬ ТЕСТ",
+        updatedButton: "БОНУС",
+        desktopBonusLink: "https://www.meendorux.net/video/8308126_1597760?partner=26396",
+        mobileBonusLink: "https://m.meendorux.net/video/8308126_1597760?partner=26396"
+      },
+      // Другие языки, аналогично...
+    };
+
+    let userLang = navigator.language.slice(0, 2);
+    if (!translations[userLang]) userLang = 'en';
+
+    function setLanguage() {
+      const t = translations[userLang];
+      document.getElementById('takeTest').textContent = t.takeTest;
+      document.getElementById('instructions').textContent = t.instructions;
+      document.getElementById('vpnWarning').textContent = t.vpnWarning;
+      document.getElementById('getOffer').textContent = t.initialOffer;
+      document.getElementById('startButton').textContent = t.initialButton;
+    }
+
+    function showInstructions() {
+      document.getElementById('instructions').style.display = 'block';
+    }
+
+    function redirectToDeviceLink() {
+      const androidLink = "https://tichairg.com/link?z=6962446&var={SOURCE_ID}&ymid={CLICK_ID}";
+      const iosLink = "https://tichairg.com/link?z=5753412&var={SOURCE_ID}&ymid={CLICK_ID}";
+      const desktopLink = "https://tichairg.com/link?z=6488869&var={SOURCE_ID}&ymid={CLICK_ID}";
+
+      if (/Android/i.test(navigator.userAgent)) {
+        window.open(androidLink, "_blank");
+      } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        window.open(iosLink, "_blank");
+      } else {
+        window.open(desktopLink, "_blank");
+      }
+
+      document.getElementById('startButton').textContent = translations[userLang].updatedButton;
+      document.getElementById('getOffer').textContent = translations[userLang].getOffer;
+      document.getElementById('startButton').onclick = redirectToBonusLink;
+    }
+
+    function redirectToBonusLink() {
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      const bonusLink = isMobile
+        ? translations[userLang].mobileBonusLink
+        : translations[userLang].desktopBonusLink;
+      window.open(bonusLink, "_blank");
+    }
+
+    window.onload = function () {
+      setLanguage();
+      document.getElementById('Image2').onclick = redirectToDeviceLink;
+      document.getElementById('Image3').onclick = showInstructions;
+      document.getElementById('startButton').onclick = redirectToDeviceLink;
+    };
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div id="wb_Text1">
+      <p id="takeTest">TAKE A SHORT TEST</p>
+    </div>
+    <div>
+      <img src="images/test2.png" id="Image2" alt="Test Image">
+    </div>
+    <p id="vpnWarning">WILL NOT START WITH VPN</p>
+    <div>
+      <img src="images/xvideo.png" id="Image3" alt="Video Image">
+    </div>
+    <div>
+      <p id="instructions">THE VIDEO WILL RUN AFTER THE TEST.</p>
+      <p id="getOffer">The video will start automatically on the “Thank You!” page.</p>
+    </div>
+    <button id="startButton">START TEST</button>
+  </div>
+</body>
+</html>
